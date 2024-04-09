@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import NavBar from "./_components/NavBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +12,18 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+      <link
+          href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          rel="stylesheet"
+        />
+      </head>
+      <body className={`${inter.className} box-border m-0 p-0 bg-[#38140D]`}>
+        <div className="relative">
+          {children}
+          <NavBar />
+        </div>
+      </body>
     </html>
   );
 }
