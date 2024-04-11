@@ -1,16 +1,27 @@
 //_components/Card.jsx
 import Link from "next/link";
 
+import * as React from "react";
+
+import {
+  Carousel,
+  CarouselContent,
+} from "@/components/ui/carousel";
 async function CardComponent({ data }) {
   return (
     <>
-      <div className="grid grid-flow-col gap-5 auto-cols-[28%] overflow-x-auto scroll_bar mb-5">
+      <Carousel>
+        <CarouselContent className="grid grid-flow-col gap-5 auto-cols-[28%] mb-5 ml-2 ">
         {data.payload.map((e) => (
           <Link href={`/view-movie-details/${e.movie_id}`} key={e.movie_id}>
             <div className="bg-white p-4 rounded-md">
               <img
-              className="rounded-md"
-                src={`${e.image == ""?"https://www.whats-on-netflix.com/wp-content/uploads/2020/01/parasite-movie-coming-to-netflix.jpg":e.image}`}
+                className="rounded-md h-[260px] w-full object-cover"
+                src={`${
+                  e.image == ""
+                    ? "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"
+                    : e.image
+                }`}
                 alt=""
               />
               <div>
@@ -22,7 +33,8 @@ async function CardComponent({ data }) {
             </div>
           </Link>
         ))}
-      </div>
+        </CarouselContent>
+      </Carousel>
     </>
   );
 }

@@ -2,6 +2,7 @@ import { getMovieById } from "@/app/service/getMovie";
 
 const MovieDetails = async ({ params }) => {
   const data = await getMovieById(params.movieId);
+
   const starRound = Math.round(data.payload.rating);
   function rating(star) {
     const starArray = [];
@@ -15,6 +16,7 @@ const MovieDetails = async ({ params }) => {
     }
     return starArray;
   }
+
   const months = [
     "Jan",
     "Feb",
@@ -40,10 +42,10 @@ const MovieDetails = async ({ params }) => {
   return (
     <>
       <div
-        className="text-white w-[85%] pt-40 mx-auto flex gap-8"
+        className="text-white w-[85%] pt-40 mx-auto flex gap-8 h-screen"
         key={data.payload.movie_id}
       >
-        <img className="w-[70%] rounded-md object-contain" src={`${data.payload.image == ""?"https://www.whats-on-netflix.com/wp-content/uploads/2020/01/parasite-movie-coming-to-netflix.jpg":data.payload.image}`} alt="" />
+        <img className="w-[70%] rounded-md h-[80%]" src={`${data.payload.image == ""?"https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg":data.payload.image}`} alt="" />
         <div className="text-sm">
           <div>
             <p className="font-bold text-xl">{data.payload.director}</p>
