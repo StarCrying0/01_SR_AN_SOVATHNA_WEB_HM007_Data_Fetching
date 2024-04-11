@@ -1,3 +1,4 @@
+//_components/Card.jsx
 import Link from "next/link";
 
 async function CardComponent({ data }) {
@@ -8,7 +9,8 @@ async function CardComponent({ data }) {
           <Link href={`/view-movie-details/${e.movie_id}`} key={e.movie_id}>
             <div className="bg-white p-4 rounded-md">
               <img
-                src={e.image}
+              className="rounded-md"
+                src={`${e.image == ""?"https://www.whats-on-netflix.com/wp-content/uploads/2020/01/parasite-movie-coming-to-netflix.jpg":e.image}`}
                 alt=""
               />
               <div>

@@ -2,11 +2,10 @@ import { getMovieById } from "@/app/service/getMovie";
 
 const MovieDetails = async ({ params }) => {
   const data = await getMovieById(params.movieId);
-
-  const star = Math.round(data.payload.rating);
-  function rating(stars) {
+  const starRound = Math.round(data.payload.rating);
+  function rating(star) {
     const starArray = [];
-    for (let i = 1; i <= stars; i += 2) {
+    for (let i = 1; i <= star; i++) {
       starArray.push(<i className="bx bxs-star text-[#EE9F2F]"></i>);
     }
     if (starArray.length <= 5) {
@@ -44,13 +43,13 @@ const MovieDetails = async ({ params }) => {
         className="text-white w-[85%] pt-40 mx-auto flex gap-8"
         key={data.payload.movie_id}
       >
-        <img className="w-[70%] rounded-md" src={data.payload.image} alt="" />
+        <img className="w-[70%] rounded-md object-contain" src={`${data.payload.image == ""?"https://www.whats-on-netflix.com/wp-content/uploads/2020/01/parasite-movie-coming-to-netflix.jpg":data.payload.image}`} alt="" />
         <div className="text-sm">
           <div>
             <p className="font-bold text-xl">{data.payload.director}</p>
             <p>{`${data.payload.runtime} minutes`}</p>
             <p>{data.payload.genre}</p>
-            {rating(star)}
+            {rating(starRound)}
           </div>
           <div className="mt-14">
             <p className="font-bold text-xl">{`${data.payload.movie_title} (${data.payload.released_year})`}</p>

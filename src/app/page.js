@@ -1,12 +1,33 @@
+//page.js
 import Image from "next/image";
 import CardComponent from "./_components/Card";
 import { getAllMovies, getAllMoviesByGenres } from "./service/getMovie";
 export default async function Home() {
   const getAllMovie = await getAllMovies();
-  const getActionMovie = await getAllMoviesByGenres("action");
-  const getDramaMovie = await getAllMoviesByGenres("drama");
-  const getHollywoodMovie = await getAllMoviesByGenres("Hollywood");
-  const getAnimeMovie = await getAllMoviesByGenres("Anime");
+  function loopGenre() {
+    const loop = [];
+    getAllMovie.payload.map((e) => {
+      if (!loop.includes(e.genre)) {
+        loop.push(e.genre);
+      }
+    });
+    return loop;
+  }
+
+  // async function get() {
+  //   const genre = loopGenre();
+  //   for(let i = 0 ; i < genre.length;i++){
+  //     // <h1 className="py-6 font-bold text-2xl text-white">{`${genre[i]} Movie &gt;`}</h1>
+  //     // let getMovieByGenre = await getAllMoviesByGenres(genre[i]);
+  //     // <CardComponent data={getMovieByGenre} />
+  //     console.log(genre[i]);
+  //   }
+  // }
+  // const getActionMovie = await getAllMoviesByGenres("action");
+  // const getDramaMovie = await getAllMoviesByGenres("drama");
+  // const getHollywoodMovie = await getAllMoviesByGenres("Hollywood");
+  // const getAnimeMovie = await getAllMoviesByGenres("Anime");
+  // const getScifiMovie = await getAllMoviesByGenres("Science%20Fiction");
   return (
     <>
       <div className="relative">
@@ -19,14 +40,31 @@ export default async function Home() {
       <main className="w-[90%] mx-auto">
         <h1 className="py-6 font-bold text-2xl text-white">All Movie &gt;</h1>
         <CardComponent data={getAllMovie} />
-        <h1 className="py-6 font-bold text-2xl text-white">Action Movie &gt;</h1>
+        {loopGenre().map(async (e) => {
+          const moviesByGenre = await getAllMoviesByGenres(e);
+          return (
+            <div>
+              <h1 className="py-6 font-bold text-2xl text-white">{`${e} Movie >`}</h1>
+              <CardComponent data={moviesByGenre} />
+            </div>
+          );
+        })}
+        {/* <h1 className="py-6 font-bold text-2xl text-white">
+          Action Movie &gt;
+        </h1>
         <CardComponent data={getActionMovie} />
         <h1 className="py-6 font-bold text-2xl text-white">Drama Movie &gt;</h1>
         <CardComponent data={getDramaMovie} />
-        <h1 className="py-6 font-bold text-2xl text-white">Hollywood Movie &gt;</h1>
+        <h1 className="py-6 font-bold text-2xl text-white">
+          Hollywood Movie &gt;
+        </h1>
         <CardComponent data={getHollywoodMovie} />
         <h1 className="py-6 font-bold text-2xl text-white">Anime Movie &gt;</h1>
         <CardComponent data={getAnimeMovie} />
+        <h1 className="py-6 font-bold text-2xl text-white">
+          Science Fiction Movie &gt;
+        </h1>
+        <CardComponent data={getScifiMovie} /> */}
       </main>
     </>
   );

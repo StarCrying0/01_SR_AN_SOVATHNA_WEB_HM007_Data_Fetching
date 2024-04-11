@@ -5,14 +5,14 @@ export const getAllMovies = async () => {
 };
 
 export const getMovieById = async (id) => {
-  const movie = await fetch(`https://movie-api-get-only-bmc3.vercel.app/api/${id}`);
+  const movie = await fetch(`https://movie-api-get-only-bmc3.vercel.app/api/${id}`,{ cache: "no-store" });
   const data = await movie.json();
   return data;
 };
 
 export const getAllMoviesByGenres = async (genre) => {
   const movies = await fetch(
-    `https://movie-api-get-only-bmc3.vercel.app/api?genre=${genre}`
+    `https://movie-api-get-only-bmc3.vercel.app/api?genre=${genre}`,{ cache: "no-store" }
   );
   const data = await movies.json();
   return data;
