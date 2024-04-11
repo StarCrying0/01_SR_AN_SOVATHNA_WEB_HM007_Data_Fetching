@@ -1,4 +1,3 @@
-//_components/Card.jsx
 import Link from "next/link";
 
 import * as React from "react";

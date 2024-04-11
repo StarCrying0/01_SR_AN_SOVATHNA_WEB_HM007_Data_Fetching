@@ -1,4 +1,3 @@
-//page.js
 import Image from "next/image";
 import CardComponent from "./_components/Card";
 import { getAllMovies, getAllMoviesByGenres } from "./service/getMovie";
